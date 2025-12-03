@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Nariza Yasmin — Portfolio</title>
+
+<style>
+/* ========== Theme ========== */
+:root{
+  --ivory: #FBF7F3;
+  --soft-purple: #C9B6E4;
+  --purple: #9D78C1;
+  --purple-dark: #7F4FA8;
+  --muted: #59486A;
+  --accent: #EDE2F8;
+}
+
+/* ========== Reset & Base ========== */
+*{box-sizing:border-box}
+body{
+  margin:0;
+  font-family: "Poppins", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+  background:var(--ivory);
+  color:var(--muted);
+  -webkit-font-smoothing:antialiased;
+  -moz-osx-font-smoothing:grayscale;
+  line-height:1.45;
+}
+
+a{color:var(--purple-dark); text-decoration:none}
+a:hover{text-decoration:underline}
+
+/* ========== Header ========== */
+header{
+  background: linear-gradient(90deg,var(--soft-purple), var(--purple));
+  color:white;
+  padding:18px 16px;
+  text-align:center;
+  font-weight:700;
+  letter-spacing:1px;
+  font-size:20px;
+  position:sticky;
+  top:50px;
+  z-index:1000;
+}
+
+/* ========== Navigation Bar ========== */
+nav{
+  position: fixed;
+  top:0;
+  left:0;
+  width:100%;
+  background: var(--purple);
+  z-index:1100;
+}
+
+nav ul {
+  list-style:none;
+  display:flex;
+  justify-content:center;
+  gap:30px;
+  margin:0;
+  padding:14px 0;
+}
+
+nav ul li a {
+  color:white;
+  font-weight:600;
+  font-size:16px;
+  text-decoration:none;
+  padding:6px 12px;
+}
+
+nav ul li a:hover {
+  background: var(--soft-purple);
+  border-radius:8px;
+  color: var(--purple-dark);
+}
+
+/* Hamburger Menu for Mobile */
+.hamburger {
+  display:none;
+  font-size:28px;
+  cursor:pointer;
+  padding:14px 20px;
+  color:white;
+}
+
+#menu-toggle { display:none; }
+
+.nav-links {
+  list-style: none;
+  display:flex;
+  justify-content:center;
+  gap:30px;
+  margin:0;
+  padding:14px 0;
+  transition: max-height 0.3s ease;
+}
+
+@media (max-width:768px){
+  .hamburger { display:block; }
+
+  .nav-links {
+    display:block;
+    max-height:0;
+    overflow:hidden;
+    flex-direction:column;
+    text-align:center;
+  }
+
+  #menu-toggle:checked + .hamburger + .nav-links {
+    max-height:500px;
+  }
+
+  .nav-links li { margin:10px 0; }
+}
+
+/* ========== Main Landing ========== */
+main{
+  padding:130px 20px 60px 20px;
+  max-width:900px;
+  margin:0 auto;
+}
+
+main section { display:none; margin-top:28px; background:white; border-radius:10px; padding:22px; box-shadow:0 6px 18px rgba(80,60,110,0.04); }
+
+main section:target { display:block; }
+main:not(:target) #main { display:block; }
+
+.landing{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+  gap:20px;
+  padding:50px 20px;
+  background: linear-gradient(180deg, white 0%);
+  border-radius:12px;
+  box-shadow:0 6px 18px rgba(100,70,130,0.06);
+}
+
+.landing-left img{
+  width:240px;
+  height:240px;
+  object-fit:cover;
+  border-radius:14px;
+  border:6px solid rgba(201,182,228,0.35);
+  box-shadow:0 8px 22px rgba(125,84,160,0.08);
+}
+
+.landing-right h1{ margin:0; font-size:28px; color: var(--purple-dark);}
+.landing-right p{ margin:8px 0; }
+.landing-quote{
+  font-style:italic;
+  color: var(--purple-dark);
+  margin:16px 0;
+  font-size:18px;
+}
+
+.center-btn a{
+  display:inline-block;
+  background: var(--purple-dark);
+  color:white;
+  padding:12px 25px;
+  border-radius:6px;
+  text-decoration:none;
+  font-weight:600;
+}
+
+.center-btn a:hover{
+  background: var(--soft-purple);
+  color: var(--purple-dark);
+}
+
+/* ========== Sections Styling ========== */
+section h2{
+  margin-top:0;
+  font-family:"Playfair Display", serif;
+  color:var(--purple-dark);
+  font-size:20px;
+}
+
+.bio-grid{
+  display:flex;
+  gap:20px;
+  align-items:flex-start;
+  flex-wrap:wrap;
+}
+
+.bio-photo{ flex:0 0 180px; }
+.bio-photo img{ width:180px;height:200px;object-fit:cover;border-radius:10px;border:4px solid rgba(157,120,193,0.12); }
+.bio-text{ flex:1; min-width:220px; }
+
+.hobbies ul{ padding-left:20px; margin-top:8px; }
+.hobbies li{ margin-bottom:6px; }
+
+.video-wrap{ margin-top:12px; max-width:760px; }
+.video-wrap iframe{ width:100%; height:360px; border-radius:8px; }
+
+.map-wrap iframe{ width:100%; height:300px; border-radius:8px; border:0; margin-top:12px; }
+
+.table-wrap{ overflow:auto; margin-bottom:20px; text-align:center; }
+table{ width:100%; border-collapse:collapse; min-width:600px; margin-bottom:12px; }
+th,td{ padding:10px 12px; border-bottom:1px solid #eee; text-align:center; }
+.stars{ color:#FFD700; font-size:16px; }
+
+.timeline{ border-left:3px solid var(--soft-purple); padding-left:14px; }
+.timeline .item{ margin-bottom:14px; }
+
+.experiences ul{ padding-left:20px; }
+
+.contact-list a{ display:inline-block; margin-right:12px; margin-bottom:10px; color:var(--purple-dark); }
+
+form{ max-width:640px; margin-top:8px; background:var(--ivory); padding:12px; border-radius:8px; }
+input[type="text"], textarea{
+  width:100%; padding:8px; border-radius:6px; border:1px solid #ddd; font-size:14px;
+  margin-top:6px; margin-bottom:10px;
+}
+button[type="submit"]{ background:var(--purple-dark); color:white; padding:10px 14px; border:0; border-radius:8px; cursor:pointer; }
+
+footer{ text-align:center; padding:18px 8px; margin-top:28px; color:white; background:var(--purple); border-radius:6px; font-weight:600; }
+
+/* Journey gallery */
+.journey-gallery {
+  display:flex;
+  flex-wrap:wrap;
+  gap:16px;
+  margin-bottom:24px;
+  justify-content:center;
+}
+.journey-gallery img {
+  width:200px;
+  height:150px;
+  object-fit:cover;
+  border-radius:10px;
+  border:3px solid rgba(157,120,193,0.12);
+  box-shadow:0 4px 12px rgba(125,84,160,0.08);
+  transition: transform 0.3s;
+}
+.journey-gallery img:hover { transform: scale(1.05); }
+
+@media (max-width:600px){
+  .landing{ flex-direction:column; padding:22px; }
+  .landing-left img{ width:180px; height:180px; }
+  .video-wrap iframe{ height:220px; }
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <input type="checkbox" id="menu-toggle">
+  <label for="menu-toggle" class="hamburger">&#9776;</label>
+  <ul class="nav-links">
+    <li><a href="#main">Home</a></li>
+    <li><a href="#about">About Me</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#education">Education</a></li>
+    <li><a href="#experiences">Experiences</a></li>
+    <li><a href="#journey">My Journey</a></li>
+    <li><a href="#contact">Contact</a></li>
+    <li><a href="#quotes">Quotes</a></li>
+  </ul>
+</nav>
+
+<header>NUR NARIZA YASMIN BINTI MOHD ZAKI</header>
+
+<main>
+
+<!-- MAIN / HOME -->
+<section class="landing" id="main" aria-label="Landing">
+  <div class="landing-left">
+    <img src="MYSELF_PEACH.jpg" alt="Photo of Nariza Yasmin">
+  </div>
+  <div class="landing-right">
+    <h1>PERSONAL WEBSITE</h1>
+    <p>“Passionate about information management and technology, aiming to make an impact.”</p>
+    <p class="landing-quote">"Be your own kind of beautiful."</p>
+    <div class="center-btn">
+      <a href="#about">LEARN MORE ABOUT ME</a>
+    </div>
+  </div>
+</section>
+
+
+<!-- About -->
+<section id="about" aria-labelledby="about-heading">
+	<h2 id="about-heading">About Me</h2>
+	<div class="bio-grid">
+		<div class="bio-photo"><img src="MYSELF_PURPLE.jpg" alt="My Photo"></div>
+		<div class="bio-text">
+			<p><b>Name:</b> Nur Nariza Yasmin Binti Mohd Zaki</p>
+			<p><b>Date of Birth:</b> 02 February 2005</p>
+			<p><b>Place of Birth:</b> Hospital Seberang Jaya</p>
+			<p><b>Nationality:</b> Malaysian</p>
+			<p><b>Status:</b> Student</p>
+		</div>
+			<p>I am currently pursuing a Diploma in Information Management at Universiti Teknologi MARA (UiTM) Kedah. I consider myself a confident and independent individual who enjoys working both individually and in a team. I am always eager to learn new skills, explore new challenges and improve myself continuously. With a strong interest in digital information and organization, I aim to build a successful career in a field that allows me to grow and contribute meaningfully.</p>
+		<h3>Hobbies</h3>
+		<div class="hobbies">
+			<ul>
+				<li>Watching movies and dramas</li>
+				<li>Playing games</li>
+				<li>Reading novel</li>
+			</ul>
+		</div>
+	</div>
+
+	<h3 style="margin-top:16px;">Favourite Music</h3>
+	<div class="video-wrap">
+ 		<iframe src="https://www.youtube.com/embed/_ywIhBOpjQA" title="Highway1009 by Enhypen" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+	</div>
+
+	<h3 style="margin-top:16px;">My Home Location</h3>
+	<div class="map-wrap">
+		<iframe src="https://www.google.com/maps/embed?pb=!3m2!1sen!2smy!4v1764079551690!5m2!1sen!2smy!6m8!1m7!1svkPelKq-aPLSnghK1eiK9Q!2m2!1d5.280485886739244!2d100.5216294904373!3f23.517508!4f0!5f0.7820865974627469" allowfullscreen="" loading="lazy"></iframe>
+	</div>
+</section>
+
+<!-- Skills -->
+<section id="skills">
+  <h2>Skills</h2>
+
+  <!-- Soft Skills -->
+  <h3>Soft Skills</h3>
+  <table>
+    <tbody>
+      <tr>
+        <td>Adaptability</td>
+        <td>
+          <span class="stars">★★★★★</span>
+        </td>
+      </tr>
+      <tr>
+        <td>Good Communication Skills</td>
+        <td>
+          <span class="stars">★★★★☆</span>
+        </td>
+      </tr>
+      <tr>
+        <td>Teamwork & Collaboration</td>
+        <td>
+          <span class="stars">★★★★☆</span>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <!-- Technical Skills -->
+  <h3>Technical Skills</h3>
+  <table>
+    <tbody>
+      <tr>
+        <td>Microsoft Office</td>
+        <td><span class="stars">★★★★★</span></td>
+      </tr>
+      <tr>
+        <td>Google Workspace</td>
+        <td><span class="stars">★★★★☆</span></td>
+      </tr>
+      <tr>
+        <td>Canva</td>
+        <td><span class="stars">★★★★★</span></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <!-- Languages -->
+  <h3>Languages</h3>
+  <table>
+    <tbody>
+      <tr>
+        <td>Malay</td>
+        <td><span class="stars">★★★★★</span></td>
+      </tr>
+      <tr>
+        <td>English</td>
+        <td><span class="stars">★★★★☆</span></td>
+      </tr>
+    </tbody>
+  </table>
+</section>
+
+<!-- Education -->
+<section id="education">
+	<h2>Education & Achievements</h2>
+    	<div class="timeline" aria-label="Education timeline">
+      		<div class="item"><b>2018–2020</b> — Sekolah Menengah Kebangsaan Tasek (Form 1–3)</div>
+		<div class="item"><b>2021–2022</b> — Sekolah Menengah Teknik Tunku Abdul Rahman Putra (Form 4 & 5). SPM (5A)</div>
+		<div class="item"><b>2023–Now</b> — Universiti Teknologi MARA (UiTM Kedah). Diploma in Information Management. Recipient of DermaSiswa B40 JPA (2023).</div>
+	</div>
+</section>
+
+<!-- Experiences -->
+<section id="experiences">
+	<h2>Experiences</h2>
+	<div class="experiences">
+		<ul>
+			<li><b>Executive Committee</b> — Logistic & Technical, Club Peers UiTM Kedah (Semester 3)</li>
+			<li><b>Treasurer</b> — Club Peers UiTM Kedah (Semester 4)</li>
+			<li><b>Industrial Training</b> — Unit Rekod, Hospital Sungai Bakap</li>
+		</ul>
+	</div>
+</section>
+
+<!-- My Journey -->
+<section id="journey">
+  <h2>My Journey at UiTM Kedah</h2>
+
+  <h3>Family Support System</h3>
+  <div class="journey-gallery">
+    <img src="FAMILY1.jpg" alt="Family Support">
+  </div>
+
+  <h3>Classmates</h3>
+  <div class="journey-gallery">
+    <img src="CLASSMATE1.jpg" alt="Classmate 1">
+    <img src="CLASSMATE2.jpg" alt="Classmate 2">
+  </div>
+
+  <h3>Industrial Training</h3>
+  <div class="journey-gallery">
+    <img src="INTERN1.jpg" alt="Industrial Training 1">
+    <img src="INTERN2.jpg" alt="Industrial Training 2">
+    <img src="INTERN3.jpg" alt="Industrial Training 3">
+  </div>
+
+  <h3>Club Peers UiTM Kedah</h3>
+  <div class="journey-gallery">
+    <img src="PEERS1.jpg" alt="Club Peers 1">
+    <img src="PEERS2.jpg" alt="Club Peers 2">
+    <img src="PEERS3.jpg" alt="Club Peers 3">
+    <img src="PEERS4.jpg" alt="Club Peers 4">
+  </div>
+</section>
+
+<!-- Contact -->
+<section id="contact">
+	<h2>Contact</h2>
+	<div class="contact-list">
+		<p><b>Instagram:</b> <a href="https://www.instagram.com/nariza_yasmin" target="_blank" rel="noopener noreferrer">instagram.com/nariza_yasmin</a></p>
+		<p><b>TikTok:</b> <a href="https://www.tiktok.com/@meowlylac" target="_blank" rel="noopener noreferrer">tiktok.com/@meowlylac</a></p>
+		<p><b>LinkedIn:</b> <a href="https://www.linkedin.com/in/nariza-yasmin-8445a8368" target="_blank" rel="noopener noreferrer">linkedin.com/in/nariza-yasmin-8445a8368</a></p>
+		<p><b>Email:</b> <a href="mailto:narizayasmin@gmail.com">narizayasmin@gmail.com</a></p>
+		<p><b>Phone:</b> <a href="tel:+60134841827">013-4841827</a></p>
+	</div>
+</section>
+
+<!-- Quotes form -->
+<section id="quotes">
+	<h2>Leave a Quote</h2>
+	<form id="quoteForm" onsubmit="event.preventDefault(); alert('Thank you for your quote!'); document.getElementById('quoteForm').reset();">
+		<label for="qname">Your name</label>
+		<input id="qname" name="qname" type="text" placeholder="Your name" required>
+
+		<label for="qtext">Your quote</label>
+		<textarea id="qtext" name="qtext" rows="5" placeholder="Write a quote..." required></textarea>
+
+		<button type="submit">Submit Quote</button>
+	</form>
+</section>
+
+</main>
+
+<footer>© 2025 Nariza Yasmin</footer>
+
+</body>
+</html>
